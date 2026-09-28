@@ -8,9 +8,9 @@ what is on track, what is slipping and why.
 It runs on demo data for **Acme Logistics**, a fictional parcel and contract-logistics
 company.
 
-**[Live demo →](https://lucasthobias.github.io/strategy-planner/)**
+**[Live demo →](https://lucascampos-dev.github.io/strategy-planner/)**
 
-![CI & Deploy](https://github.com/lucasthobias/strategy-planner/actions/workflows/deploy.yml/badge.svg)
+![CI & Deploy](https://github.com/lucascampos-dev/strategy-planner/actions/workflows/deploy.yml/badge.svg)
 ![React 18](https://img.shields.io/badge/React-18-61dafb?logo=react&logoColor=white)
 ![TypeScript strict](https://img.shields.io/badge/TypeScript-strict-3178c6?logo=typescript&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-6-646cff?logo=vite&logoColor=white)
@@ -203,7 +203,7 @@ erDiagram
 Requires Node.js 20+.
 
 ```bash
-git clone https://github.com/lucasthobias/strategy-planner.git
+git clone https://github.com/lucascampos-dev/strategy-planner.git
 cd strategy-planner
 npm install
 npm run dev          # http://localhost:5173/strategy-planner/
