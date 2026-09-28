@@ -1,0 +1,66 @@
+/* Design tokens — every color, radius and spacing value used by the app. */
+:root {
+  /* Brand */
+  --navy-950: #07111f;
+  --navy-900: #0b1b33;
+  --navy-800: #13284a;
+  --navy-700: #1d3761;
+  --navy-300: #9fb0cc;
+  --teal-500: #14b8a6;
+  --teal-600: #0f9f8f;
+  --teal-700: #0b7a6e;
+  --teal-50: #e7f7f5;
+
+  /* Surfaces & ink */
+  --bg: #f3f5f9;
+  --surface: #ffffff;
+  --surface-muted: #f8fafc;
+  --border: #e2e7ef;
+  --border-strong: #cbd4e1;
+  --ink: #0f1c2e;
+  --ink-2: #44546b;
+  --ink-3: #6b7a90;
+  --focus: #14b8a6;
+
+  /* Data series (validated for CVD separation on light surfaces) */
+  --series-1: #0f9f8f; /* execution / progress */
+  --series-2: #4c5bd4; /* results / indicators */
+
+  /* Status palette — always paired with a text label */
+  --good: #0ca30c;
+  --good-ink: #0b6b0b;
+  --good-bg: #e8f6e8;
+  --warning: #fab219;
+  --warning-ink: #7a5200;
+  --warning-bg: #fff6e0;
+  --serious: #ec835a;
+  --critical: #d03b3b;
+  --critical-ink: #a12626;
+  --critical-bg: #fdecec;
+  --neutral: #94a3b8;
+  --neutral-ink: #475569;
+  --neutral-bg: #eef1f5;
+  --done: #4c5bd4;
+  --done-ink: #3440a8;
+  --done-bg: #eceefc;
+
+  /* Shape & rhythm */
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 14px;
+  --shadow-sm: 0 1px 2px rgb(15 28 46 / 6%);
+  --shadow: 0 1px 2px rgb(15 28 46 / 6%), 0 4px 16px rgb(15 28 46 / 6%);
+  --shadow-lg: 0 20px 50px rgb(7 17 31 / 25%);
+  --sidebar-w: 248px;
+  --gutter: 28px;
+
+  --font:
+    'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+}
+
+@media (max-width: 720px) {
+  :root {
+    --gutter: 16px;
+  }
+}

@@ -1,0 +1,386 @@
+/**
+ * Demo data for "Acme Logistics", a fictional parcel & contract-logistics company.
+ * All names, people and figures are invented.
+ *
+ * Dates are generated relative to `today` so the demo always looks like a plan
+ * in mid-execution, whenever it is opened.
+ */
+import { monthEnd, monthStart, periodOf, todayIso } from './dates';
+import type { Indicator, Initiative, Measurement, Objective, PlanData } from './types';
+
+export const COMPANY_NAME = 'Acme Logistics';
+
+export function createSeedData(today: string = todayIso()): PlanData {
+  const start = (offset: number) => monthStart(today, offset);
+  const end = (offset: number) => monthEnd(today, offset);
+
+  const objectives: Objective[] = [
+    {
+      id: 'obj-1',
+      code: 'OBJ-1',
+      title: 'Grow recurring revenue from contract logistics',
+      description:
+        'Shift the revenue mix from spot freight to multi-year contracts and subscription tiers.',
+      perspective: 'financial',
+      owner: 'Maya Chen',
+    },
+    {
+      id: 'obj-2',
+      code: 'OBJ-2',
+      title: 'Reduce cost per delivered parcel',
+      description: 'Lower operating cost through smarter routing, fleet renewal and procurement.',
+      perspective: 'financial',
+      owner: 'Priya Nair',
+    },
+    {
+      id: 'obj-3',
+      code: 'OBJ-3',
+      title: 'Deliver a best-in-class on-time experience',
+      description: 'Give shippers and recipients predictable, transparent deliveries.',
+      perspective: 'customer',
+      owner: 'Sofia Marques',
+    },
+    {
+      id: 'obj-4',
+      code: 'OBJ-4',
+      title: 'Digitize warehouse operations',
+      description: 'Modernize WMS, identification and slotting across the three hubs.',
+      perspective: 'process',
+      owner: 'Marco Rossi',
+    },
+    {
+      id: 'obj-5',
+      code: 'OBJ-5',
+      title: 'Build a data-driven, safety-first workforce',
+      description: 'Upskill supervisors in analytics and make safety certification universal.',
+      perspective: 'learning',
+      owner: 'Grace Kim',
+    },
+  ];
+
+  const ini = (
+    n: number,
+    objectiveId: string,
+    title: string,
+    owner: string,
+    status: Initiative['status'],
+    startOffset: number,
+    endOffset: number,
+    budget: number,
+    spent: number,
+    progress: number,
+    description = '',
+  ): Initiative => ({
+    id: `ini-${n}`,
+    code: `INI-${n}`,
+    objectiveId,
+    title,
+    description,
+    owner,
+    status,
+    startDate: start(startOffset),
+    endDate: end(endOffset),
+    budget,
+    spent,
+    progress,
+  });
+
+  const initiatives: Initiative[] = [
+    ini(
+      1,
+      'obj-1',
+      'Launch B2B subscription freight tier',
+      'Maya Chen',
+      'in_progress',
+      -6,
+      4,
+      180_000,
+      92_000,
+      55,
+      'Monthly subscription with reserved capacity for mid-size shippers.',
+    ),
+    ini(
+      2,
+      'obj-1',
+      'Key-account CRM rollout',
+      'Daniel Okafor',
+      'completed',
+      -9,
+      -2,
+      95_000,
+      91_500,
+      100,
+      'Single pipeline and account plans for the top 60 customers.',
+    ),
+    ini(
+      3,
+      'obj-2',
+      'Route optimization engine',
+      'Priya Nair',
+      'in_progress',
+      -7,
+      2,
+      240_000,
+      205_000,
+      48,
+      'Dynamic routing for last-mile vans using traffic and delivery windows.',
+    ),
+    ini(
+      4,
+      'obj-2',
+      'Electric van pilot — North hub',
+      'Tom Varga',
+      'in_progress',
+      -4,
+      8,
+      320_000,
+      88_000,
+      31,
+      'Twenty electric vans with depot charging, measured against diesel control group.',
+    ),
+    ini(
+      5,
+      'obj-2',
+      'Fuel card consolidation',
+      'Tom Varga',
+      'cancelled',
+      -5,
+      -1,
+      30_000,
+      4_000,
+      10,
+      'Superseded by the electric fleet roadmap.',
+    ),
+    ini(
+      6,
+      'obj-3',
+      'Real-time shipment tracking portal',
+      'Sofia Marques',
+      'in_progress',
+      -5,
+      3,
+      150_000,
+      86_000,
+      68,
+      'Self-service tracking with proactive exception alerts.',
+    ),
+    ini(
+      7,
+      'obj-3',
+      'Delivery-window SMS notifications',
+      'Liam Brooks',
+      'in_progress',
+      -6,
+      -1,
+      38_000,
+      36_500,
+      85,
+      'Two-hour delivery window sent the morning of delivery.',
+    ),
+    ini(
+      8,
+      'obj-3',
+      'Customer feedback loop (NPS)',
+      'Aisha Rahman',
+      'planned',
+      1,
+      6,
+      40_000,
+      0,
+      0,
+      'Post-delivery micro-survey with closed-loop follow-up.',
+    ),
+    ini(
+      9,
+      'obj-4',
+      'Warehouse management system upgrade',
+      'Marco Rossi',
+      'in_progress',
+      -8,
+      4,
+      410_000,
+      255_000,
+      60,
+      'Replace the legacy WMS in all three hubs with a cloud-native platform.',
+    ),
+    ini(
+      10,
+      'obj-4',
+      'Barcode-to-RFID migration',
+      'Hannah Weber',
+      'on_hold',
+      -3,
+      6,
+      120_000,
+      34_000,
+      15,
+      'Paused while the WMS upgrade stabilizes.',
+    ),
+    ini(
+      11,
+      'obj-4',
+      'Automated slotting analytics',
+      'Kenji Watanabe',
+      'in_progress',
+      -2,
+      5,
+      75_000,
+      14_000,
+      27,
+      'Velocity-based slotting recommendations generated weekly.',
+    ),
+    ini(
+      12,
+      'obj-5',
+      'Safety certification program',
+      'Grace Kim',
+      'in_progress',
+      -6,
+      5,
+      60_000,
+      27_000,
+      52,
+      'Certification path for every warehouse and driver role.',
+    ),
+    ini(
+      13,
+      'obj-5',
+      'Analytics academy for supervisors',
+      'Noah Petrov',
+      'in_progress',
+      -3,
+      2,
+      45_000,
+      21_000,
+      18,
+      'Eight-week cohort program on dashboards and root-cause analysis.',
+    ),
+  ];
+
+  const indicators: Indicator[] = [
+    {
+      id: 'kpi-1',
+      code: 'KPI-1',
+      objectiveId: 'obj-1',
+      name: 'Recurring revenue share',
+      unit: '%',
+      polarity: 'higher_is_better',
+      baseline: 22,
+      target: 35,
+      frequency: 'monthly',
+    },
+    {
+      id: 'kpi-2',
+      code: 'KPI-2',
+      objectiveId: 'obj-2',
+      name: 'Cost per delivered parcel',
+      unit: 'USD',
+      polarity: 'lower_is_better',
+      baseline: 4.8,
+      target: 4.1,
+      frequency: 'monthly',
+    },
+    {
+      id: 'kpi-3',
+      code: 'KPI-3',
+      objectiveId: 'obj-2',
+      name: 'Fleet fuel consumption',
+      unit: 'L/100 km',
+      polarity: 'lower_is_better',
+      baseline: 14.5,
+      target: 12,
+      frequency: 'monthly',
+    },
+    {
+      id: 'kpi-4',
+      code: 'KPI-4',
+      objectiveId: 'obj-3',
+      name: 'On-time delivery rate',
+      unit: '%',
+      polarity: 'higher_is_better',
+      baseline: 91,
+      target: 97,
+      frequency: 'monthly',
+    },
+    {
+      id: 'kpi-5',
+      code: 'KPI-5',
+      objectiveId: 'obj-3',
+      name: 'Net Promoter Score',
+      unit: 'pts',
+      polarity: 'higher_is_better',
+      baseline: 32,
+      target: 50,
+      frequency: 'quarterly',
+    },
+    {
+      id: 'kpi-6',
+      code: 'KPI-6',
+      objectiveId: 'obj-4',
+      name: 'Order picking accuracy',
+      unit: '%',
+      polarity: 'higher_is_better',
+      baseline: 98.2,
+      target: 99.5,
+      frequency: 'monthly',
+    },
+    {
+      id: 'kpi-7',
+      code: 'KPI-7',
+      objectiveId: 'obj-4',
+      name: 'Dock-to-stock time',
+      unit: 'hours',
+      polarity: 'lower_is_better',
+      baseline: 18,
+      target: 8,
+      frequency: 'monthly',
+    },
+    {
+      id: 'kpi-8',
+      code: 'KPI-8',
+      objectiveId: 'obj-5',
+      name: 'Lost-time incident rate',
+      unit: 'per 200k h',
+      polarity: 'lower_is_better',
+      baseline: 2.4,
+      target: 1.2,
+      frequency: 'monthly',
+    },
+  ];
+
+  // Monthly series ending last month (oldest first).
+  const monthly: Record<string, number[]> = {
+    'kpi-1': [22, 23.4, 24.6, 26.1, 27.9, 29.2, 30.5, 31.9],
+    'kpi-2': [4.8, 4.76, 4.68, 4.61, 4.52, 4.44, 4.36, 4.28],
+    'kpi-3': [14.5, 14.6, 14.4, 14.5, 14.3, 14.2, 14.3, 14.1],
+    'kpi-4': [91, 91.8, 92.9, 93.6, 94.8, 95.9, 96.6, 97.3],
+    'kpi-6': [98.2, 98.4, 98.6, 98.7, 98.9, 99.0, 99.1, 99.2],
+    'kpi-7': [18, 17.2, 16.1, 15.0, 13.9, 12.8, 11.9, 10.9],
+    'kpi-8': [2.4, 2.35, 2.3, 2.2, 2.15, 2.1, 2.05, 2.0],
+  };
+
+  const measurements: Measurement[] = [];
+  for (const [indicatorId, values] of Object.entries(monthly)) {
+    values.forEach((value, idx) => {
+      const offset = idx - values.length; // …, -2, -1
+      measurements.push({
+        id: `m-${indicatorId}-${idx}`,
+        indicatorId,
+        period: periodOf(today, offset),
+        value,
+      });
+    });
+  }
+  // Quarterly NPS: every third month.
+  [32, 36, 41].forEach((value, idx) => {
+    measurements.push({
+      id: `m-kpi-5-${idx}`,
+      indicatorId: 'kpi-5',
+      period: periodOf(today, -7 + idx * 3),
+      value,
+      note: idx === 2 ? 'Tracking portal beta launched this quarter' : undefined,
+    });
+  });
+
+  return { version: 1, objectives, initiatives, indicators, measurements };
+}
